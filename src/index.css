@@ -164,8 +164,12 @@ All colors MUST be HSL.
   }
 
   .mood-button:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-gentle);
+  }
+
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
   }
 
   .mood-happy {

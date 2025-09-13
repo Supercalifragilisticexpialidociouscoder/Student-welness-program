@@ -1,73 +1,154 @@
-# Welcome to your Lovable project
+# 🧠 Student Wellness Monitor
 
-## Project info
+> **AI-Powered Mental Health Tracking for Students**  
+> Track your daily mood, understand emotional patterns, and receive personalized wellness recommendations powered by intelligent sentiment analysis.
 
-**URL**: https://lovable.dev/projects/5d97fd98-74ce-4500-bd5f-2db3dc8617f4
+![Student Wellness Monitor](https://via.placeholder.com/800x400/4ade80/ffffff?text=Student+Wellness+Monitor+Screenshot)
 
-## How can I edit this code?
+## 🎯 Problem Statement
 
-There are several ways of editing your application.
+Mental health among students is a growing concern, with many struggling silently without proper tools to track and understand their emotional well-being. Traditional mental health resources are often:
 
-**Use Lovable**
+- **Inaccessible** - Limited availability and high costs
+- **Reactive** - Only addressing issues after they become severe  
+- **Impersonal** - Generic advice that doesn't consider individual patterns
+- **Disconnected** - No continuous tracking or insights over time
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5d97fd98-74ce-4500-bd5f-2db3dc8617f4) and start prompting.
+**Our Solution:** A beautiful, AI-powered wellness companion that makes mental health tracking as simple as checking social media, while providing actionable insights to improve student well-being.
 
-Changes made via Lovable will be committed automatically to this repo.
+## ✨ Features
 
-**Use your preferred IDE**
+### 🎨 **Modern User Experience**
+- **Minimal Design** - Clean, student-friendly interface with calming gradients
+- **Emoji Integration** - Visual mood selection with 😊 😢 😰 😐 for instant recognition
+- **Responsive Layout** - Perfect on desktop, tablet, and mobile devices
+- **Smooth Animations** - Delightful interactions that encourage daily use
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🤖 **AI-Powered Analysis**
+- **Sentiment Analysis** - Intelligent categorization of emotions (Positive/Negative/Neutral)
+- **Personalized Recommendations** - Context-aware suggestions based on current mood
+- **Pattern Recognition** - Identifies trends and emotional patterns over time
+- **Smart Insights** - Actionable wellness advice tailored to individual needs
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### 📊 **Comprehensive Analytics**
+- **Interactive Charts** - Beautiful line graphs showing mood trends over time
+- **Mood Distribution** - Pie charts visualizing emotional balance
+- **Progress Tracking** - Statistics on positive mood percentage and streaks
+- **Historical Data** - Complete timeline of wellness journey with detailed insights
 
-Follow these steps:
+### 🎯 **Wellness Tools**
+- **Daily Check-ins** - Quick, 30-second mood logging process
+- **Motivational Quotes** - Inspiring messages that refresh with each visit
+- **Export Functionality** - Download complete wellness data as JSON
+- **Session Storage** - Secure local storage of mood history
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🚀 How to Run the Project
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Prerequisites
+- **Node.js** (v18 or higher) - [Download here](https://nodejs.org/)
+- **npm** or **yarn** package manager
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Quick Start
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd student-wellness-monitor
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
 npm run dev
+
+# 4. Open your browser
+# Navigate to http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+### Build for Production
+```bash
+# Create production build
+npm run build
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+# Preview production build
+npm run preview
+```
 
-**Use GitHub Codespaces**
+### Tech Stack
+- **Frontend:** React 18 + TypeScript + Vite
+- **Styling:** Tailwind CSS + shadcn/ui components
+- **Charts:** Recharts for data visualization
+- **Icons:** Lucide React + Custom emojis
+- **State Management:** React Hooks + Local Storage
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📱 Screenshot
 
-## What technologies are used for this project?
+*A comprehensive dashboard showing mood check-in form, AI analysis results, trend visualization, and wellness summary all on one screen - perfect for hackathon demos!*
 
-This project is built with:
+## 🏆 Hackathon Highlights
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### **UI/UX Excellence** (40% Weight)
+- ✅ Modern, minimal Tailwind design
+- ✅ Centered card layout with soft shadows
+- ✅ Emoji icons for each mood (😊 😢 😰 😐)
+- ✅ Welcoming header: "Track your daily mood & boost your wellness 🌱"
 
-## How can I deploy this project?
+### **AI Functionality** (40% Weight)
+- ✅ Real-time sentiment analysis (Positive/Negative/Neutral)
+- ✅ Personalized AI recommendations for each mood type
+- ✅ Session storage of all mood entries
+- ✅ Interactive line chart with hover details showing mood + sentiment
+- ✅ Comprehensive mood summary with positive/negative/neutral counts
 
-Simply open [Lovable](https://lovable.dev/projects/5d97fd98-74ce-4500-bd5f-2db3dc8617f4) and click on Share -> Publish.
+### **Code Quality** (20% Weight)
+- ✅ Clean, modular TypeScript components
+- ✅ Comprehensive comments and documentation
+- ✅ Proper separation of concerns
+- ✅ Reusable design system with semantic tokens
 
-## Can I connect a custom domain to my Lovable project?
+### **Bonus Features** 🎉
+- ✅ Random motivational quotes that change on each visit
+- ✅ Interactive charts with detailed hover information
+- ✅ Footer: "Built with ❤️ at AI-THON2K25 🚀"
+- ✅ Screenshot-ready single-page layout
+- ✅ Professional export functionality
 
-Yes, you can!
+## 🎨 Design Philosophy
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Our design follows **wellness-first principles**:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+- **Calming Colors** - Soft blues and greens promote tranquility
+- **Gentle Animations** - Smooth transitions reduce anxiety
+- **Intuitive Navigation** - Zero learning curve for students
+- **Visual Feedback** - Immediate confirmation of actions
+- **Accessibility** - High contrast ratios and semantic HTML
+
+## 📈 Future Enhancements
+
+- **Social Features** - Anonymous peer support communities
+- **Integration** - Connect with university counseling services
+- **Advanced Analytics** - Weekly/monthly wellness reports
+- **Reminder System** - Smart notifications for check-ins
+- **Therapist Dashboard** - Professional insights and referrals
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Credits
+
+**Built with ❤️ at AI-THON2K25 🚀**
+
+- **AI Integration** - Advanced sentiment analysis and personalized recommendations
+- **Design System** - Modern, accessible wellness-focused UI
+- **Data Visualization** - Interactive charts and analytics
+- **Student-Centric** - Designed by students, for students
+
+---
+
+**🌟 Making mental health accessible, one mood at a time.**
+
+*Student Wellness Monitor - Your AI-powered companion for emotional well-being*

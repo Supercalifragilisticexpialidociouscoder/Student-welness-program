@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MoodCheckIn, { MoodEntry } from "@/components/MoodCheckIn";
 import MoodDashboard from "@/components/MoodDashboard";
+import MoodResult from "@/components/MoodResult";
+import MoodSummary from "@/components/MoodSummary";
 import WellnessHeader from "@/components/WellnessHeader";
+import MotivationalQuote from "@/components/MotivationalQuote";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Download, BarChart3, PlusCircle } from "lucide-react";
+import { Download, BarChart3, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [moodEntries, setMoodEntries] = useState<MoodEntry[]>([]);
-  const [activeTab, setActiveTab] = useState("checkin");
+  const [latestEntry, setLatestEntry] = useState<MoodEntry | null>(null);
   const { toast } = useToast();
 
   // Load mood entries from localStorage on component mount
@@ -37,11 +41,7 @@ const Index = () => {
 
   const handleMoodSubmit = (entry: MoodEntry) => {
     setMoodEntries(prev => [...prev, entry]);
-    
-    // Auto-switch to dashboard after submission
-    setTimeout(() => {
-      setActiveTab("dashboard");
-    }, 2000);
+    setLatestEntry(entry);
   };
 
   const exportData = () => {
@@ -85,42 +85,64 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
         <WellnessHeader />
         
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-6">
-            <TabsList className="grid w-full max-w-md grid-cols-2">
-              <TabsTrigger value="checkin" className="flex items-center space-x-2">
-                <PlusCircle className="w-4 h-4" />
-                <span>Check-in</span>
-              </TabsTrigger>
-              <TabsTrigger value="dashboard" className="flex items-center space-x-2">
-                <BarChart3 className="w-4 h-4" />
-                <span>Dashboard</span>
-              </TabsTrigger>
-            </TabsList>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          {/* Left Column - Mood Check-in */}
+          <div className="lg:col-span-2">
+            <MoodCheckIn onMoodSubmit={handleMoodSubmit} />
             
-            {moodEntries.length > 0 && (
-              <Button
-                onClick={exportData}
-                variant="outline"
-                className="mt-4 sm:mt-0 flex items-center space-x-2"
-              >
-                <Download className="w-4 h-4" />
-                <span>Export Data</span>
-              </Button>
+            {/* Show latest mood result if available */}
+            {latestEntry && (
+              <div className="mt-8">
+                <MoodResult latestEntry={latestEntry} />
+              </div>
             )}
           </div>
+          
+          {/* Right Column - Mood Summary */}
+          <div>
+            <MoodSummary moodEntries={moodEntries} />
+          </div>
+        </div>
 
-          <TabsContent value="checkin" className="space-y-6">
-            <MoodCheckIn onMoodSubmit={handleMoodSubmit} />
-          </TabsContent>
-
-          <TabsContent value="dashboard" className="space-y-6">
+        {/* Charts and Analytics Section */}
+        {moodEntries.length > 0 && (
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold gradient-text flex items-center">
+                <BarChart3 className="w-6 h-6 mr-2" />
+                📊 Wellness Analytics Dashboard
+              </h2>
+              
+              <div className="flex items-center space-x-4">
+                <div className="text-sm text-muted-foreground">
+                  <Heart className="w-4 h-4 inline mr-1 text-red-400" />
+                  {moodEntries.length} mood{moodEntries.length !== 1 ? 's' : ''} tracked
+                </div>
+                <Button
+                  onClick={exportData}
+                  variant="outline"
+                  className="flex items-center space-x-2 hover:bg-primary/5"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Export Data</span>
+                </Button>
+              </div>
+            </div>
+            
             <MoodDashboard moodEntries={moodEntries} />
-          </TabsContent>
-        </Tabs>
+          </div>
+        )}
+
+        {/* Motivational Quote */}
+        <div className="mb-8">
+          <MotivationalQuote />
+        </div>
+
+        <Footer />
       </div>
     </div>
   );

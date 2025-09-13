@@ -52,12 +52,20 @@ export default function MoodDashboard({ moodEntries }: MoodDashboardProps) {
 
   if (totalEntries === 0) {
     return (
-      <Card className="wellness-card text-center py-12">
-        <Brain className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-        <h3 className="text-xl font-semibold mb-2">No mood entries yet</h3>
-        <p className="text-muted-foreground">
-          Start tracking your wellness journey by submitting your first mood check-in above!
-        </p>
+      <Card className="wellness-card text-center py-16">
+        <div className="max-w-md mx-auto">
+          <Brain className="w-20 h-20 mx-auto mb-6 text-muted-foreground" />
+          <h3 className="text-2xl font-bold mb-4">Start Your Wellness Journey</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            No mood entries yet! Complete your first mood check-in above to see your personalized 
+            wellness dashboard with insights, trends, and AI-powered recommendations.
+          </p>
+          <div className="mt-6 text-sm text-muted-foreground">
+            <span className="bg-primary/10 px-3 py-1 rounded-full">
+              🎯 Track • 📊 Analyze • 🌱 Improve
+            </span>
+          </div>
+        </div>
       </Card>
     );
   }
@@ -110,9 +118,12 @@ export default function MoodDashboard({ moodEntries }: MoodDashboardProps) {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Mood Trend Chart */}
+        {/* Enhanced Mood Trend Chart */}
         <Card className="wellness-card">
-          <h3 className="text-lg font-semibold mb-4">Mood Trend Over Time</h3>
+          <h3 className="text-xl font-semibold mb-4 flex items-center">
+            <TrendingUp className="w-5 h-5 mr-2 text-primary" />
+            📈 Mood Trend Over Time
+          </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>
@@ -138,22 +149,27 @@ export default function MoodDashboard({ moodEntries }: MoodDashboardProps) {
                     return entry ? `${label} (${entry.date})` : label;
                   }}
                   formatter={(value: any, name) => {
-                    const moods = ["", "Stressed", "Sad", "Neutral", "Happy"];
-                    return [moods[value] || value, "Mood"];
+                    const moods = ["", "😰 Stressed", "😢 Sad", "😐 Neutral", "😊 Happy"];
+                    const entry = chartData.find(d => d.moodValue === value);
+                    return [
+                      moods[value] || value, 
+                      `Sentiment: ${entry?.sentiment || 'unknown'}`
+                    ];
                   }}
                   contentStyle={{
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
-                    borderRadius: "8px"
+                    borderRadius: "12px",
+                    boxShadow: "0 8px 32px hsl(225 15% 15% / 0.1)"
                   }}
                 />
                 <Line 
                   type="monotone" 
                   dataKey="moodValue" 
                   stroke="hsl(var(--primary))" 
-                  strokeWidth={3}
-                  dot={{ fill: "hsl(var(--primary))", strokeWidth: 2, r: 4 }}
-                  activeDot={{ r: 6, stroke: "hsl(var(--primary))", strokeWidth: 2 }}
+                  strokeWidth={4}
+                  dot={{ fill: "hsl(var(--primary))", strokeWidth: 3, r: 6 }}
+                  activeDot={{ r: 8, stroke: "hsl(var(--primary))", strokeWidth: 3, fill: "hsl(var(--background))" }}
                 />
               </LineChart>
             </ResponsiveContainer>

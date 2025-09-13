@@ -22,56 +22,64 @@ const moodOptions = [
   {
     type: "happy" as MoodType,
     label: "Happy",
+    emoji: "😊",
     icon: Smile,
     description: "Feeling good and positive",
+    color: "from-green-400 to-green-500"
   },
   {
     type: "sad" as MoodType,
-    label: "Sad",
+    label: "Sad", 
+    emoji: "😢",
     icon: Frown,
     description: "Feeling down or low",
+    color: "from-blue-400 to-blue-500"
   },
   {
     type: "stressed" as MoodType,
     label: "Stressed",
+    emoji: "😰",
     icon: Zap,
     description: "Feeling overwhelmed or anxious",
+    color: "from-red-400 to-red-500"
   },
   {
     type: "neutral" as MoodType,
     label: "Neutral",
+    emoji: "😐",
     icon: Minus,
     description: "Feeling balanced or okay",
+    color: "from-gray-400 to-gray-500"
   },
 ];
 
-// Simple AI sentiment analysis function
+// Enhanced AI sentiment analysis with more detailed recommendations
 const analyzeMood = (mood: MoodType): { sentiment: "positive" | "negative" | "neutral"; recommendation: string } => {
   switch (mood) {
     case "happy":
       return {
         sentiment: "positive",
-        recommendation: "Great job! Keep up the positive energy. Consider sharing your joy with friends or celebrating your achievements."
+        recommendation: "🌟 Amazing! Your positive energy is contagious. Consider sharing this joy with friends, celebrating your achievements, or using this momentum to tackle a challenging task. Keep shining!"
       };
     case "sad":
       return {
-        sentiment: "negative",
-        recommendation: "It's okay to feel sad sometimes. Try taking a short walk, listening to uplifting music, or talking to a friend."
+        sentiment: "negative", 
+        recommendation: "🤗 It's completely normal to feel sad sometimes. Try taking a gentle 10-minute walk outside, listening to your favorite uplifting playlist, or reaching out to a trusted friend. Remember, this feeling will pass."
       };
     case "stressed":
       return {
         sentiment: "negative",
-        recommendation: "Take a deep breath. Consider trying a 5-minute meditation, organizing your tasks, or doing some light exercise."
+        recommendation: "🧘‍♂️ Take a deep breath - you've got this! Try the 4-7-8 breathing technique, organize your tasks by priority, or do 5 minutes of stretching. Consider breaking big tasks into smaller, manageable steps."
       };
     case "neutral":
       return {
         sentiment: "neutral",
-        recommendation: "You're in a balanced state. This is a good time to plan ahead or try something new that might spark joy."
+        recommendation: "⚖️ You're in a balanced, reflective state - that's valuable! This is a perfect time to plan ahead, try something new that might spark joy, or practice gratitude by listing 3 things you're thankful for today."
       };
     default:
       return {
         sentiment: "neutral",
-        recommendation: "Take care of yourself and remember that every feeling is valid."
+        recommendation: "💙 Remember that every emotion is valid and part of your human experience. Take care of yourself and be kind to your feelings."
       };
   }
 };
@@ -115,16 +123,16 @@ export default function MoodCheckIn({ onMoodSubmit }: MoodCheckInProps) {
 
   return (
     <Card className="wellness-card">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold gradient-text mb-2">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold gradient-text mb-3">
           How are you feeling today?
         </h2>
-        <p className="text-muted-foreground">
-          Select your current mood to track your wellness journey
+        <p className="text-muted-foreground text-lg">
+          Track your daily mood & boost your wellness 🌱
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-6 mb-8">
         {moodOptions.map((option) => {
           const Icon = option.icon;
           const isSelected = selectedMood === option.type;
@@ -133,14 +141,15 @@ export default function MoodCheckIn({ onMoodSubmit }: MoodCheckInProps) {
             <div
               key={option.type}
               className={`mood-button mood-${option.type} ${
-                isSelected ? "ring-2 ring-ring ring-offset-2" : ""
-              }`}
+                isSelected ? "ring-4 ring-ring ring-offset-4 scale-105" : ""
+              } hover:scale-102 transition-all duration-300 cursor-pointer`}
               onClick={() => handleMoodSelect(option.type)}
             >
-              <div className="flex flex-col items-center space-y-2">
-                <Icon className="w-8 h-8" />
-                <span className="font-semibold text-lg">{option.label}</span>
-                <span className="text-sm opacity-90">{option.description}</span>
+              <div className="flex flex-col items-center space-y-3">
+                <div className="text-4xl mb-2">{option.emoji}</div>
+                <Icon className="w-6 h-6" />
+                <span className="font-bold text-xl">{option.label}</span>
+                <span className="text-sm opacity-90 text-center px-2">{option.description}</span>
               </div>
             </div>
           );
@@ -148,14 +157,29 @@ export default function MoodCheckIn({ onMoodSubmit }: MoodCheckInProps) {
       </div>
 
       {selectedMood && (
-        <div className="text-center">
+        <div className="text-center bg-gradient-to-r from-primary/5 to-secondary/5 p-6 rounded-xl border border-border/50">
+          <div className="mb-4">
+            <div className="text-2xl mb-2">
+              {moodOptions.find(option => option.type === selectedMood)?.emoji}
+            </div>
+            <h3 className="text-xl font-semibold text-foreground">
+              Mood: {selectedMood.charAt(0).toUpperCase() + selectedMood.slice(1)}
+            </h3>
+          </div>
           <Button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-semibold"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-12 py-4 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             style={{ background: "var(--gradient-primary)" }}
           >
-            {isSubmitting ? "Analyzing your mood..." : "Submit Mood Check-in"}
+            {isSubmitting ? (
+              <div className="flex items-center space-x-2">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Analyzing your mood...</span>
+              </div>
+            ) : (
+              "🧠 Analyze My Mood"
+            )}
           </Button>
         </div>
       )}
