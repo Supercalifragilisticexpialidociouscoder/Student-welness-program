@@ -8,33 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Wellness-focused color palette */
+    --background: 210 30% 98%;
+    --foreground: 225 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 225 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 225 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 213 94% 68%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 142 69% 58%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 20% 95%;
+    --muted-foreground: 215 20% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 31 81% 65%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 20% 90%;
+    --input: 210 20% 95%;
+    --ring: 213 94% 68%;
+
+    /* Mood-specific colors */
+    --mood-happy: 142 69% 58%;
+    --mood-sad: 213 94% 68%;
+    --mood-stressed: 0 84% 60%;
+    --mood-neutral: 215 20% 65%;
+
+    /* Gradients */
+    --gradient-wellness: linear-gradient(135deg, hsl(213 94% 68% / 0.1), hsl(142 69% 58% / 0.1));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(210 20% 98% / 0.9));
+    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 94% 75%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 69% 58%), hsl(142 69% 65%));
+
+    /* Shadows */
+    --shadow-gentle: 0 4px 20px hsl(213 94% 68% / 0.1);
+    --shadow-card: 0 8px 32px hsl(225 15% 15% / 0.08);
+    --shadow-float: 0 12px 40px hsl(213 94% 68% / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.2s ease-out;
 
     --radius: 0.5rem;
 
@@ -56,33 +78,49 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 225 25% 8%;
+    --foreground: 210 20% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 225 25% 10%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 225 25% 10%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 213 94% 68%;
+    --primary-foreground: 225 25% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 142 69% 58%;
+    --secondary-foreground: 225 25% 8%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 225 15% 15%;
+    --muted-foreground: 215 20% 60%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 31 81% 65%;
+    --accent-foreground: 225 25% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 95%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 225 15% 20%;
+    --input: 225 15% 15%;
+    --ring: 213 94% 68%;
+
+    /* Dark mode mood colors */
+    --mood-happy: 142 69% 58%;
+    --mood-sad: 213 94% 68%;
+    --mood-stressed: 0 84% 60%;
+    --mood-neutral: 215 20% 65%;
+
+    /* Dark gradients */
+    --gradient-wellness: linear-gradient(135deg, hsl(213 94% 68% / 0.15), hsl(142 69% 58% / 0.15));
+    --gradient-card: linear-gradient(145deg, hsl(225 25% 12% / 0.9), hsl(225 25% 10% / 0.9));
+    --gradient-primary: linear-gradient(135deg, hsl(213 94% 68%), hsl(213 94% 75%));
+    --gradient-secondary: linear-gradient(135deg, hsl(142 69% 58%), hsl(142 69% 65%));
+
+    --shadow-gentle: 0 4px 20px hsl(225 25% 8% / 0.4);
+    --shadow-card: 0 8px 32px hsl(225 25% 8% / 0.3);
+    --shadow-float: 0 12px 40px hsl(213 94% 68% / 0.2);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -101,5 +139,63 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-wellness);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .wellness-card {
+    @apply bg-card border border-border rounded-xl p-6;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+  }
+
+  .wellness-card:hover {
+    box-shadow: var(--shadow-float);
+    transform: translateY(-2px);
+  }
+
+  .mood-button {
+    @apply px-6 py-4 rounded-xl font-medium text-center cursor-pointer border-2 border-transparent;
+    transition: var(--transition-smooth);
+  }
+
+  .mood-button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-gentle);
+  }
+
+  .mood-happy {
+    @apply bg-gradient-to-br;
+    background: linear-gradient(135deg, hsl(var(--mood-happy)), hsl(var(--mood-happy) / 0.8));
+    color: white;
+  }
+
+  .mood-sad {
+    @apply bg-gradient-to-br;
+    background: linear-gradient(135deg, hsl(var(--mood-sad)), hsl(var(--mood-sad) / 0.8));
+    color: white;
+  }
+
+  .mood-stressed {
+    @apply bg-gradient-to-br;
+    background: linear-gradient(135deg, hsl(var(--mood-stressed)), hsl(var(--mood-stressed) / 0.8));
+    color: white;
+  }
+
+  .mood-neutral {
+    @apply bg-gradient-to-br;
+    background: linear-gradient(135deg, hsl(var(--mood-neutral)), hsl(var(--mood-neutral) / 0.8));
+    color: white;
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

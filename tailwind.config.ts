@@ -47,6 +47,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        mood: {
+          happy: "hsl(var(--mood-happy))",
+          sad: "hsl(var(--mood-sad))",
+          stressed: "hsl(var(--mood-stressed))",
+          neutral: "hsl(var(--mood-neutral))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
