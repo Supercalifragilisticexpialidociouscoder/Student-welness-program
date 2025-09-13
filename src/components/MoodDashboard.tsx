@@ -1,8 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MoodEntry } from "./MoodCheckIn";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { Calendar, TrendingUp, Heart, Brain } from "lucide-react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from "recharts";
+import { Calendar, TrendingUp, Heart, Brain, Activity, Zap } from "lucide-react";
 
 interface MoodDashboardProps {
   moodEntries: MoodEntry[];
@@ -116,17 +116,23 @@ export default function MoodDashboard({ moodEntries }: MoodDashboardProps) {
         </Card>
       </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {/* Enhanced Mood Trend Chart */}
-        <Card className="wellness-card">
+        <Card className="wellness-card lg:col-span-2">
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <TrendingUp className="w-5 h-5 mr-2 text-primary" />
             📈 Mood Trend Over Time
           </h3>
-          <div className="h-64">
+          <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={chartData}>
+                <defs>
+                  <linearGradient id="moodGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis 
                   dataKey="day" 
@@ -168,26 +174,30 @@ export default function MoodDashboard({ moodEntries }: MoodDashboardProps) {
                   dataKey="moodValue" 
                   stroke="hsl(var(--primary))" 
                   strokeWidth={4}
+                  fill="url(#moodGradient)"
                   dot={{ fill: "hsl(var(--primary))", strokeWidth: 3, r: 6 }}
-                  activeDot={{ r: 8, stroke: "hsl(var(--primary))", strokeWidth: 3, fill: "hsl(var(--background))" }}
+                  activeDot={{ r: 10, stroke: "hsl(var(--primary))", strokeWidth: 3, fill: "hsl(var(--background))" }}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
         </Card>
 
-        {/* Mood Distribution */}
+        {/* Mood Distribution Donut Chart */}
         <Card className="wellness-card">
-          <h3 className="text-lg font-semibold mb-4">Mood Distribution</h3>
-          <div className="h-64">
+          <h3 className="text-lg font-semibold mb-4 flex items-center">
+            <Activity className="w-5 h-5 mr-2 text-secondary" />
+            🍩 Mood Split
+          </h3>
+          <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={moodDistribution}
                   cx="50%"
                   cy="50%"
-                  innerRadius={40}
-                  outerRadius={80}
+                  innerRadius={50}
+                  outerRadius={100}
                   paddingAngle={5}
                   dataKey="value"
                   label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -200,10 +210,101 @@ export default function MoodDashboard({ moodEntries }: MoodDashboardProps) {
                   contentStyle={{
                     backgroundColor: "hsl(var(--card))",
                     border: "1px solid hsl(var(--border))",
-                    borderRadius: "8px"
+                    borderRadius: "12px",
+                    boxShadow: "0 8px 32px hsl(225 15% 15% / 0.1)"
                   }}
                 />
               </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </Card>
+
+        {/* Weekly Sentiment Bar Chart */}
+        <Card className="wellness-card lg:col-span-2 xl:col-span-1">
+          <h3 className="text-lg font-semibold mb-4 flex items-center">
+            <Zap className="w-5 h-5 mr-2 text-accent" />
+            📊 Weekly Sentiment
+          </h3>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={[
+                  { name: 'Positive', value: positiveEntries, color: '#22c55e' },
+                  { name: 'Negative', value: moodEntries.filter(e => e.sentiment === 'negative').length, color: '#ef4444' },
+                  { name: 'Neutral', value: moodEntries.filter(e => e.sentiment === 'neutral').length, color: '#6b7280' }
+                ]}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis 
+                  dataKey="name" 
+                  stroke="hsl(var(--muted-foreground))"
+                  fontSize={12}
+                />
+                <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
+                <Tooltip 
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "12px"
+                  }}
+                />
+                <Bar 
+                  dataKey="value" 
+                  fill="hsl(var(--primary))"
+                  radius={[4, 4, 0, 0]}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </Card>
+
+        {/* Sentiment Trend Mini Chart */}
+        <Card className="wellness-card lg:col-span-2 xl:col-span-2">
+          <h3 className="text-lg font-semibold mb-4 flex items-center">
+            <Brain className="w-5 h-5 mr-2 text-purple-500" />
+            🧠 Sentiment Evolution
+          </h3>
+          <div className="h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis 
+                  dataKey="day" 
+                  stroke="hsl(var(--muted-foreground))"
+                  fontSize={12}
+                />
+                <YAxis 
+                  domain={[-1, 1]}
+                  tickFormatter={(value) => {
+                    if (value === 1) return "Positive";
+                    if (value === 0) return "Neutral";
+                    if (value === -1) return "Negative";
+                    return "";
+                  }}
+                  stroke="hsl(var(--muted-foreground))"
+                  fontSize={12}
+                />
+                <Tooltip 
+                  formatter={(value: any, name, props) => {
+                    const sentiment = props.payload.sentiment;
+                    return [sentiment.charAt(0).toUpperCase() + sentiment.slice(1), "Sentiment"];
+                  }}
+                  contentStyle={{
+                    backgroundColor: "hsl(var(--card))",
+                    border: "1px solid hsl(var(--border))",
+                    borderRadius: "12px"
+                  }}
+                />
+                <Line 
+                  type="monotone" 
+                  dataKey={(entry: any) => entry.sentiment === "positive" ? 1 : entry.sentiment === "negative" ? -1 : 0}
+                  stroke="hsl(var(--secondary))" 
+                  strokeWidth={3}
+                  dot={{ fill: "hsl(var(--secondary))", r: 4 }}
+                  activeDot={{ r: 6, stroke: "hsl(var(--secondary))", strokeWidth: 2 }}
+                />
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </Card>

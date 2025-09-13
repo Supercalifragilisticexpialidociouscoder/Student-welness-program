@@ -132,7 +132,7 @@ export default function MoodCheckIn({ onMoodSubmit }: MoodCheckInProps) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {moodOptions.map((option) => {
           const Icon = option.icon;
           const isSelected = selectedMood === option.type;
@@ -140,16 +140,34 @@ export default function MoodCheckIn({ onMoodSubmit }: MoodCheckInProps) {
           return (
             <div
               key={option.type}
-              className={`mood-button mood-${option.type} ${
-                isSelected ? "ring-4 ring-ring ring-offset-4 scale-105" : ""
-              } hover:scale-102 transition-all duration-300 cursor-pointer`}
+              className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ${
+                isSelected 
+                  ? "ring-4 ring-primary ring-offset-4 scale-105 shadow-2xl" 
+                  : "hover:scale-105 hover:shadow-xl"
+              }`}
               onClick={() => handleMoodSelect(option.type)}
             >
-              <div className="flex flex-col items-center space-y-3">
-                <div className="text-4xl mb-2">{option.emoji}</div>
-                <Icon className="w-6 h-6" />
-                <span className="font-bold text-xl">{option.label}</span>
-                <span className="text-sm opacity-90 text-center px-2">{option.description}</span>
+              <div className={`mood-${option.type} p-6 h-full min-h-[140px] flex flex-col items-center justify-center space-y-3 relative`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                <div className="text-5xl mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                  {option.emoji}
+                </div>
+                
+                <Icon className="w-6 h-6 text-white/90" />
+                
+                <div className="text-center relative z-10">
+                  <span className="font-bold text-xl text-white block">{option.label}</span>
+                  <span className="text-sm text-white/80 block mt-1 px-2 leading-tight">
+                    {option.description}
+                  </span>
+                </div>
+                
+                {isSelected && (
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-white/30 rounded-full flex items-center justify-center">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                  </div>
+                )}
               </div>
             </div>
           );
